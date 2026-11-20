@@ -1,155 +1,720 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Egotrip on the Mooch design system.
+   Tokens, buttons and motion are lifted from mooch.agency (tokens.css, ui.css,
+   motion.css) so the two read as one family. Change a value here, not in a
+   component. Tailwind v4 maps the tokens to utilities in @theme below. */
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.5rem;
-  }
+@import "tailwindcss";
 
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-  }
+/* next-themes toggles .dark on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Palette (mooch tokens.css) */
+  --black: #000000; /* Heaviest ink: headings */
+  --ink: #1d1d1f; /* Body text */
+  --paper: #ffffff;
+  --surface: #fbfbfd;
+  --muted: #6e6e73;
+  --muted-small: #5a5a5f; /* ~7:1 on white, for text below 14px */
+  --hairline: #d2d2d7;
+  --hairline-focus: #86868b;
+  --muted-on-dark: #8e8e93; /* Secondary text on black (pressed chips, footer) */
+  --error: #b00020;
+  --success: #0a7d3f;
+
+  /* The one borrowed colour. Marks sunshine in forecasts and nothing else:
+     decorative only, never text (it has no text contrast on paper). */
+  --sun: #f5a623;
+  --rain: #7d8fa3;
+
+  --shadow-border: 0px 0px 0px 1px rgba(0, 0, 0, 0.06), 0px 1px 2px -1px rgba(0, 0, 0, 0.06),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.04);
+  --shadow-border-hover: 0px 0px 0px 1px rgba(0, 0, 0, 0.08), 0px 1px 2px -1px rgba(0, 0, 0, 0.08),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.06);
+  --scrim: rgba(0, 0, 0, 0.5);
+  --shadow-modal: 0 24px 60px rgba(0, 0, 0, 0.18);
+
+  /* Type. --font-instrument comes from next/font in app/layout.tsx. */
+  --serif: var(--font-instrument), "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto,
+    sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Liberation Mono", monospace;
+
+  /* Layout rhythm */
+  --pad-x: clamp(20px, 5vw, 56px);
+  --rhythm: clamp(72px, 10vw, 140px);
+  --eyebrow-gap: 40px;
+  --max: 1320px;
+
+  /* Motion: decide slow (arrivals), deliver fast (hover, press). */
+  --ease-decide: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-deliver: cubic-bezier(0.2, 0, 0, 1);
+  --t-decide: 1.56s;
+  --t-deliver: 0.15s;
 }
 
-/* Light mode overrides */
-.light {
-  color-scheme: light;
+/* Dark theme: mooch's [data-theme="dark"] remap, keyed to .dark. It remaps
+   roles, so anything styled on tokens flips with no rules of its own. */
+.dark {
+  color-scheme: dark;
+  --black: #ffffff;
+  --ink: #f5f5f7;
+  --paper: #0b0b0c;
+  --surface: #161618;
+  --muted: #98989d;
+  --muted-small: #aeaeb2;
+  --hairline: #2c2c2e;
+  --hairline-focus: #636366;
+  --muted-on-dark: #5a5a5f; /* On the inverted --black ground, which is white here */
+  --error: #ff453a;
+  --success: #30d158;
+  --rain: #8e9db0;
+  --shadow-border: 0px 0px 0px 1px rgba(255, 255, 255, 0.09), 0px 1px 2px -1px rgba(0, 0, 0, 0.4),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.3);
+  --shadow-border-hover: 0px 0px 0px 1px rgba(255, 255, 255, 0.16), 0px 1px 2px -1px rgba(0, 0, 0, 0.4),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.3);
+  --scrim: rgba(0, 0, 0, 0.75);
+  --shadow-modal: 0 24px 60px rgba(0, 0, 0, 0.6);
 }
 
-.light .bg-zinc-950 {
-  background-color: #f8f8f8;
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-heavy: var(--black);
+  --color-muted: var(--muted);
+  --color-quiet: var(--muted-small);
+  --color-hairline: var(--hairline);
+  --color-hairline-focus: var(--hairline-focus);
+  --color-sun: var(--sun);
+  --color-rain: var(--rain);
+  --color-error: var(--error);
+  --font-serif: var(--serif);
+  --font-sans: var(--sans);
+  --font-mono: var(--mono);
 }
 
-.light .bg-zinc-900 {
-  background-color: #ffffff;
-}
-
-.light .bg-zinc-800 {
-  background-color: #f0f0f0;
-}
-
-.light .text-zinc-100 {
-  color: #1a1a1a;
-}
-
-.light .text-zinc-200 {
-  color: #222222;
-}
-
-.light .text-zinc-300 {
-  color: #333333;
-}
-
-.light .text-zinc-400 {
-  color: #555555;
-}
-
-.light .text-zinc-500 {
-  color: #666666;
-}
-
-.light .text-zinc-600 {
-  color: #777777;
-}
-
-.light .border-zinc-800 {
-  border-color: #e0e0e0;
-}
-
-.light .border-zinc-700 {
-  border-color: #d0d0d0;
-}
-
-/* Ensure proper transitions */
+/* ───────── Base ───────── */
 html {
-  transition: background-color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
-
-/* Badge styles for better readability */
-.badge-undiscovered {
-  @apply bg-emerald-100 text-emerald-800 dark:bg-emerald-900/70 dark:text-emerald-300;
-}
-
-.badge-emerging {
-  @apply bg-blue-100 text-blue-800 dark:bg-blue-900/70 dark:text-blue-300;
-}
-
-.badge-popular {
-  @apply bg-amber-100 text-amber-800 dark:bg-amber-900/70 dark:text-amber-300;
-}
-
-.badge-mainstream {
-  @apply bg-purple-100 text-purple-800 dark:bg-purple-900/70 dark:text-purple-300;
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
+body {
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--paper);
+  font-feature-settings: "tnum", "kern", "liga", "ss01"; /* Mooch body settings */
+  overflow-x: clip; /* clip, not hidden: hidden would make body a scroll container and break sticky bars */
+}
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
 
-/* Typography System */
+
+/* ───────── Components ─────────
+   Mooch's own classes (ui.css: .pill, .ghost, .copy-btn; motion.css: .reveal)
+   plus the app pieces built from the same tokens: app bar, segmented control,
+   chips, cards, tiles, sun marks, tabs and the phone action dock.
+   Promote a pattern here on its third use; never restyle one per page. */
 @layer components {
-  .heading-primary { 
-    @apply text-4xl sm:text-5xl font-light tracking-tight; 
+  /* ── Type ── */
+  /* Mono uppercase label with a short leading rule (mooch .hero-eyebrow). */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted-small);
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
-  .heading-secondary { 
-    @apply text-2xl sm:text-3xl font-light tracking-tight; 
+  .eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--ink);
+    flex: none;
   }
-  .heading-tertiary { 
-    @apply text-xl sm:text-2xl font-light; 
+  /* Plain mono label: metadata, stat names, captions. */
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted-small);
   }
-  .body-large { 
-    @apply font-sans text-lg leading-relaxed; 
+  .display {
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    color: var(--black);
+    text-wrap: balance;
   }
-  .body-normal { 
-    @apply font-sans text-base leading-normal; 
+  /* Section heading (mooch "heading" style). */
+  .h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(32px, 4vw, 44px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    text-wrap: balance;
   }
-  .body-small { 
-    @apply font-sans text-sm leading-snug; 
+  .display em,
+  .h2 em {
+    font-style: italic;
   }
-  .label { 
-    @apply font-sans text-sm font-medium tracking-wide uppercase; 
+  .lead {
+    font-size: clamp(17px, 1.6vw, 19px);
+    line-height: 1.55;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  /* The product name, set like Mooch's: serif italic, no logo file. */
+  .wordmark {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--black);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* ── Buttons (mooch ui.css) ── */
+  .pill,
+  .ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    min-height: 44px;
+    border-radius: 980px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .pill {
+    background: var(--black);
+    color: var(--paper);
+    border: 1px solid var(--black);
+    transition:
+      transform var(--t-deliver) var(--ease-deliver),
+      background var(--t-deliver) var(--ease-deliver),
+      opacity var(--t-deliver) var(--ease-deliver);
+  }
+  .pill:hover {
+    background: var(--ink);
+    transform: translateY(-1px);
+  }
+  .pill:active {
+    transform: scale(0.96);
+  }
+  .ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--hairline-focus);
+    transition:
+      border-color var(--t-deliver) var(--ease-deliver),
+      color var(--t-deliver) var(--ease-deliver),
+      transform var(--t-deliver) var(--ease-deliver);
+  }
+  .ghost:hover {
+    border-color: var(--ink);
+    color: var(--black);
+  }
+  .ghost:active {
+    transform: scale(0.96);
+  }
+  .arrow {
+    display: inline-block;
+    transition: transform var(--t-deliver) var(--ease-deliver);
+  }
+  .pill:hover .arrow,
+  .group:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  /* Round icon-only button (theme toggle, back). Always carries an aria-label. */
+  .iconbtn {
+    width: 44px;
+    height: 44px;
+    flex: none;
+    display: inline-grid;
+    place-items: center;
+    border: 0;
+    border-radius: 980px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background var(--t-deliver) var(--ease-deliver);
+  }
+  .iconbtn:hover {
+    background: var(--surface);
+  }
+
+  /* "From London ▾": the origin control in the app bar. */
+  .origin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    max-width: 100%;
+    padding: 0 16px;
+    border: 1px solid var(--hairline-focus);
+    border-radius: 980px;
+    background: var(--paper);
+    color: var(--black);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color var(--t-deliver) var(--ease-deliver);
+  }
+  .origin-btn:hover {
+    border-color: var(--ink);
+  }
+
+  /* Segmented control: one choice from a short set (flight radius, sort). */
+  .seg {
+    display: inline-flex;
+    max-width: 100%;
+    border-radius: 980px;
+    background: var(--surface);
+    box-shadow: var(--shadow-border);
+  }
+  .seg button {
+    flex: 1 0 auto;
+    min-height: 44px;
+    padding: 0 15px;
+    border: 0;
+    border-radius: 980px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      background var(--t-deliver) var(--ease-deliver),
+      color var(--t-deliver) var(--ease-deliver);
+  }
+  .seg button:hover {
+    color: var(--black);
+  }
+  .seg button[aria-pressed="true"] {
+    background: var(--black);
+    color: var(--paper);
+  }
+
+  /* Chip: toggles and filter buttons. Same pill radius as .pill and .ghost. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid var(--hairline-focus);
+    border-radius: 980px;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      border-color var(--t-deliver) var(--ease-deliver),
+      background var(--t-deliver) var(--ease-deliver),
+      color var(--t-deliver) var(--ease-deliver);
+  }
+  .chip:hover {
+    border-color: var(--ink);
+  }
+  .chip[aria-pressed="true"],
+  .chip[aria-expanded="true"] {
+    background: var(--black);
+    border-color: var(--black);
+    color: var(--paper);
+  }
+  /* Count or hint inside a chip, in the mono face. */
+  .chip .n {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--muted-small);
+  }
+  .chip[aria-pressed="true"] .n,
+  .chip[aria-expanded="true"] .n {
+    color: var(--muted-on-dark);
+  }
+
+  /* Tag: a fact, not a control (country, region, crowd). Mooch radius-chip. */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 10px;
+    border-radius: 6px;
+    background: var(--surface);
+    box-shadow: var(--shadow-border);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-small);
+  }
+
+  /* Mono copy chip (mooch .copy-btn). */
+  .copy-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--hairline-focus);
+    border-radius: 6px;
+    padding: 8px 14px;
+    min-height: 44px;
+    cursor: pointer;
+    transition:
+      border-color var(--t-deliver) var(--ease-deliver),
+      color var(--t-deliver) var(--ease-deliver);
+  }
+  .copy-btn:hover {
+    border-color: var(--ink);
+  }
+  .copy-btn[data-copied="true"] {
+    color: var(--success);
+  }
+
+  /* Text field: pill, like every other control. Wrap in .search for the icon. */
+  .field {
+    width: 100%;
+    font: inherit;
+    font-size: 16px; /* 16px stops iOS zooming on focus */
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--hairline-focus);
+    border-radius: 980px;
+    padding: 0 16px;
+    min-height: 44px;
+    transition: border-color var(--t-deliver) var(--ease-deliver);
+  }
+  .field::placeholder {
+    color: var(--muted);
+  }
+  .field:hover,
+  .field:focus {
+    border-color: var(--ink);
+  }
+  .field:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 1px;
+  }
+  .search {
+    position: relative;
+    display: block;
+  }
+  .search > svg {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    pointer-events: none;
+  }
+  .search > .field {
+    padding-left: 42px;
+  }
+
+  /* ── Surfaces ── */
+  /* The one raised ground. Shadow-as-border, never a solid border. */
+  .card {
+    background: var(--surface);
+    border-radius: 10px;
+    box-shadow: var(--shadow-border);
+  }
+  a.card {
+    display: block;
+    transition: box-shadow var(--t-deliver) var(--ease-deliver);
+  }
+  a.card:hover {
+    box-shadow: var(--shadow-border-hover);
+  }
+  /* Hairline grid: 1px gaps instead of gutters (Mooch layout rule). Children
+     paint paper so the gaps read as rules. */
+  .tiles {
+    display: grid;
+    gap: 1px;
+    background: var(--hairline);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow-border);
+  }
+  .tiles > * {
+    background: var(--paper);
+  }
+  .tile {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--paper);
+    transition: background var(--t-deliver) var(--ease-deliver);
+  }
+  a.tile:hover {
+    background: var(--surface);
+  }
+
+  /* ── Sun marks: the one borrowed colour, decorative only, never text ── */
+  .sunbar {
+    display: block;
+    height: 3px;
+    width: 100%;
+    border-radius: 3px;
+    background: var(--hairline);
+    overflow: hidden;
+  }
+  .sunbar > span {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    background: var(--sun);
+  }
+  /* 14 vertical bars, one per day: height = hours of direct sun. */
+  .bars {
+    display: grid;
+    grid-template-columns: repeat(14, minmax(0, 1fr));
+    gap: clamp(3px, 0.5vw, 6px);
+    align-items: end;
+  }
+  .bars .track {
+    display: flex;
+    align-items: flex-end;
+    height: var(--bars-h, 104px);
+    border-radius: 4px;
+    background: var(--paper);
+    box-shadow: inset 0 0 0 1px var(--hairline);
+    overflow: hidden;
+  }
+  .bars .fill {
+    width: 100%;
+    background: var(--sun);
+  }
+  .bars .fill.wet {
+    background: var(--rain);
+  }
+  .wifi {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .wifi > span {
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--hairline);
+  }
+  .wifi > span.on {
+    background: var(--ink);
+  }
+
+  /* ── Place page ── */
+  /* In-page section tabs. Sticky under nothing: the app bar scrolls away. */
+  .tabs {
+    display: flex;
+    gap: 28px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    background: var(--paper);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .tabs a {
+    min-height: 52px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: -1px;
+    border-bottom: 2px solid transparent;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+    transition:
+      color var(--t-deliver) var(--ease-deliver),
+      border-color var(--t-deliver) var(--ease-deliver);
+  }
+  .tabs a:hover {
+    color: var(--black);
+  }
+  .tabs a[aria-current="true"] {
+    color: var(--black);
+    border-bottom-color: var(--black);
+  }
+  .tabs .n {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted-small);
+  }
+  /* Phone: the flight and the booking link stay in reach at the bottom. */
+  .dock {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px var(--pad-x) calc(12px + env(safe-area-inset-bottom));
+    background: var(--paper);
+    border-top: 1px solid var(--hairline);
+  }
+
+  /* Skeleton block for loading states. A quiet pulse, off under reduced motion. */
+  .skeleton {
+    background: var(--hairline);
+    border-radius: 4px;
+    opacity: 0.5;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .skeleton {
+      animation: pulse 1.6s var(--ease-decide) infinite;
+    }
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* ───────── Motion (mooch motion.css) ───────── */
+/* Reveal on load: the slow, considered blur settle.
+   Only a `from` keyframe plus fill-mode `backwards`: the start state holds
+   through the delay, and once the animation ends nothing is left applied.
+   Ending on blur(0)/translateY(0) with `forwards` (or even on `none`, which
+   browsers interpolate to blur(0px) and an identity matrix) leaves a filter
+   and transform on every revealed block for good: an extra compositing layer
+   each, and a containing block that traps any position: fixed child. */
+.reveal {
+  animation: reveal var(--t-decide) var(--ease-decide) backwards;
+}
+.reveal.d1 {
+  animation-delay: 0.06s;
+}
+.reveal.d2 {
+  animation-delay: 0.23s;
+}
+.reveal.d3 {
+  animation-delay: 0.4s;
+}
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
+}
+
+/* ───────── Dialog (origin picker) ─────────
+   Centred card on wider screens, bottom sheet on phones. */
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--scrim);
+  z-index: 50;
+}
+.dialog-content {
+  position: fixed;
+  z-index: 51;
+  left: 50%;
+  top: 12vh;
+  transform: translateX(-50%);
+  width: min(560px, calc(100vw - 32px));
+  max-height: 76vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 16px;
+  box-shadow: var(--shadow-border), var(--shadow-modal);
+}
+@media (max-width: 639px) {
+  .dialog-content {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    transform: none;
+    width: 100%;
+    max-height: 88dvh;
+    border-radius: 16px 16px 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dialog-overlay[data-state="open"] {
+    animation: fade-in 0.2s var(--ease-deliver);
+  }
+  .dialog-content[data-state="open"] {
+    animation: dialog-in 0.35s var(--ease-decide);
+  }
+  @media (max-width: 639px) {
+    .dialog-content[data-state="open"] {
+      animation: sheet-in 0.35s var(--ease-decide);
+    }
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px) scale(0.98);
+  }
+}
+@keyframes sheet-in {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
   }
 }
