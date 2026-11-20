@@ -34,9 +34,10 @@ export async function ogCard({ eyebrow, title, italic, footer }: { eyebrow: stri
           {eyebrow}
         </div>
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 48 }}>
-          <div style={{ display: "flex", flexWrap: "wrap", fontSize: title.length > 14 ? 120 : 168, lineHeight: 0.92, letterSpacing: -4, maxWidth: 880 }}>
+          {/* columnGap, not a margin on the italic: when the italic wraps to its own line it starts flush left. */}
+          <div style={{ display: "flex", flexWrap: "wrap", columnGap: 28, fontSize: title.length > 14 ? 120 : 168, lineHeight: 0.92, letterSpacing: -4, maxWidth: 880 }}>
             <span>{title}</span>
-            {italic && <span style={{ fontStyle: "italic", marginLeft: 28 }}>{italic}</span>}
+            {italic && <span style={{ fontStyle: "italic" }}>{italic}</span>}
           </div>
           <div style={{ width: 150, height: 150, borderRadius: 999, background: "#f5a623", flexShrink: 0 }} />
         </div>

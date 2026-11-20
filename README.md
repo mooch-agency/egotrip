@@ -1,6 +1,6 @@
 # Egotrip
 
-Cloudy here? Leave.
+The sunniest cities around you.
 
 Egotrip ranks 80 places by how much sun they'll get over the next two weeks and how long it takes to fly there from wherever you are. Each place comes with somewhere to take calls, things to do after hours and a cover story for the office. A plaything by [Mooch](https://mooch.agency).
 

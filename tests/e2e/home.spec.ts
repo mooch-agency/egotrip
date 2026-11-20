@@ -16,7 +16,7 @@ test.describe("home", () => {
   })
 
   test("hero, origin, best bet and tiles", async ({ page }) => {
-    await expect(page.locator("h1")).toContainText("Cloudy here?")
+    await expect(page.locator("h1")).toHaveText("The sunniest cities around you.")
     await expect(page.getByRole("banner").getByRole("button", { name: /^From Lisbon/ })).toContainText("From Lisbon")
     await expect(page.getByText("Best bet this week")).toBeVisible()
     await expect(page.getByRole("link", { name: /^See .+/ })).toHaveAttribute("href", /^\/to\//)

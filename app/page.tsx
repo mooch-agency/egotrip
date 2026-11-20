@@ -31,12 +31,14 @@ export default function Home() {
       <Topbar />
       <main id="main" className="mx-auto max-w-[var(--max)] px-[var(--pad-x)]">
         <section className="flex flex-col gap-4 pt-[clamp(28px,5vw,56px)] pb-[clamp(20px,3vw,36px)]">
-          <h1 className="display reveal text-[clamp(46px,6.5vw,88px)] leading-[0.95]">
-            Cloudy here? <em>Leave.</em>
+          {/* "around you" never splits, and balance evens the lines, so it reads
+              "The sunniest / cities around you." on phones and one line on desktop. */}
+          <h1 className="display reveal text-[clamp(42px,6.5vw,88px)] leading-[0.95] text-balance">
+            The sunniest cities <em className="whitespace-nowrap">around you</em>.
           </h1>
           <p className="lead reveal d1 max-w-[58ch]">
-            The sunniest places you can fly to, ranked on the next 7 days of forecast. Each one comes with somewhere to
-            take calls and a cover story for the office.
+            Ranked on hours of sunshine over the next 7 days, with flight times from wherever you are. Every city comes
+            with somewhere to take calls and a cover story for the office.
           </p>
         </section>
 

@@ -21,7 +21,7 @@ const DESCRIPTION = `The sunniest places you can fly to from wherever you are. 1
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "Egotrip. Cloudy here? Leave.", template: "%s · Egotrip" },
+  title: { default: "Egotrip. The sunniest cities around you.", template: "%s · Egotrip" },
   description: DESCRIPTION,
   applicationName: "Egotrip",
   authors: [{ name: "Mooch", url: "https://mooch.agency" }],
@@ -30,12 +30,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_GB",
     siteName: "Egotrip",
-    title: "Egotrip. Cloudy here? Leave.",
+    title: "Egotrip. The sunniest cities around you.",
     description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Egotrip. Cloudy here? Leave.",
+    title: "Egotrip. The sunniest cities around you.",
     description: DESCRIPTION,
     creator: "@tahigichigi",
   },
