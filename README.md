@@ -74,6 +74,10 @@ BRAND_VOICE.md              how Egotrip writes
 
 Order matters: the forecast request maps results back by array position, so append rather than insert if you can.
 
+## Deploy
+
+Vercel project `v0-egotrip`, connected to `mooch-agency/egotrip`. Every push builds: `main` to production, other branches to a preview (behind Vercel login). Install and build commands are left to auto-detection, so Vercel uses pnpm from `pnpm-lock.yaml`. No env vars are required; set `NEXT_PUBLIC_APP_URL` for canonical links and OG URLs.
+
 ## Design
 
 The visual language comes from the mooch.agency design system: paper and ink palette, Instrument Serif headings with one italic word, mono labels, hairline grids, pill buttons and segmented controls, blur reveal with a reduced-motion guard. The page structure is Egotrip's own: an app, not an agency site. Home opens straight on the list; a place page leads with "Getting there" and keeps the booking link in a dock on phones. Two borrowed colours, `--sun` and `--rain`, are only for forecast marks. Light and dark follow the system unless toggled.
