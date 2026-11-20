@@ -1,157 +1,49 @@
-# EgoTrip Brand Voice Guide
+# Egotrip voice
 
-## The Elite Travel Agent Archetype
+Egotrip finds the sunniest places you can fly to from wherever you are, with somewhere to take calls and a cover story for the office. It's a plaything by [Mooch](https://mooch.agency), so it sounds like Mooch: plain, dry, specific.
 
-EgoTrip speaks as a sophisticated, snobbishly refined travel agent who treats users as fellow members of the elite. Think of us as your exclusive travel advisor who understands that you're "one of us" - someone who appreciates the finer things and deserves nothing less than the best. We're the kind of travel agent who knows the difference between a destination and a... destination.
+## Who's talking
 
-## What EgoTrip Is About
+A well-travelled friend who finds the founder lifestyle faintly ridiculous and helps anyway. The joke is the exec who "works remotely" from a beach. We deliver it straight-faced and never punch at the reader.
 
-EgoTrip identifies the sunniest destinations within your immediate flight radius, curated for those who can afford the luxury of spontaneous escape. When your current weather becomes rather... pedestrian, we present you with alternatives that meet your... elevated atmospheric standards. No more settling for whatever weather your current location deigns to provide - we've prepared sophisticated alternatives for those who understand that weather is... non-negotiable.
+## Rules
 
-## Core Personality Traits
+- Plain words, short sentences. One idea per sentence.
+- Specific beats clever. "2,800 hours of sun a year" beats "endless sunshine".
+- Concrete details: a street, a dish, a train time, a number.
+- Sentence case everywhere: headings, buttons, labels.
+- British spelling (colour, neighbourhood, centre).
+- No em dashes, no ellipses, no exclamation marks.
+- Numbers as digits.
+- Second person for the reader ("you"), first person plural for us, first person singular for alibis.
+- Buttons say what happens: "Find flights", "Change city", "Copy".
 
-### **Snobbishly Sophisticated**
-- Uses elevated, refined language
-- Assumes users appreciate high culture and exclusivity
-- Never explains basic concepts - we assume you "get it"
+## Banned words
 
-### **Exclusively Inclusive**
-- Treats users as peers in sophistication
-- Creates an "us vs. them" dynamic (we're the elite, others are... pedestrian)
-- Makes users feel special for being "in the know"
-- Acts as a travel agent who understands the sophisticated traveler's needs
+curated, sophisticated, discerning, elevated, refined, pedestrian, exquisite, nestled, vibrant, bustling, boasts, hidden gem, paradise, unforgettable, breathtaking, world-class, must-see, oasis, tapestry, delve, elevate, journey (as a metaphor), "naturally", "of course".
 
-### **Subtly Condescending**
-- Dismissive of common, touristy experiences
-- References "the masses" or "typical tourists" with mild disdain
-- But never condescending to the user - they're "one of us"
+## Lengths
 
-### **Culturally Superior**
-- References art, wine, fine dining, exclusive experiences
-- Assumes knowledge of high-end brands and destinations
-- Speaks as if we're both members of an exclusive club
+| Field | Limit | Example |
+|---|---|---|
+| Tagline | 70 chars | Seven hills, cold vinho verde, one of Europe's sunniest capitals. |
+| Description | 2-3 sentences, 320 chars | Around 2,800 hours of sun a year and an Atlantic breeze that stops it getting silly. |
+| Workspace note | 80 chars | Above the Mercado da Ribeira. Lots of plants, few quiet corners. Book a booth. |
+| Place note | 80 chars | Garlic prawns, then a steak sandwich for dessert. That's the order. |
+| Alibi | 100 chars, first person, something you'd actually say on Slack | Legal wants someone on the ground before we open the EU entity. |
+| Spotted | 90 chars, third person, a type not a real person | Two VCs in matching gilets 'scouting the ecosystem' at Ramiro. |
 
-## Voice Characteristics
+## UI copy
 
-### **Language Patterns**
-- **Elevated vocabulary**: "curated," "sophisticated," "discerning," "refined," "exquisite"
-- **Implied superiority**: "naturally," "of course," "as you'd expect," "obviously"
-- **Exclusive references**: "someone of your caliber," "our kind," "the discerning traveler"
-- **Subtle condescension**: "the usual fare," "pedestrian," "common," "typical"
-- **Elipses for effect**: "..." used sparingly for dramatic pauses and implied understanding
+| Instead of | Write |
+|---|---|
+| Secure your escape | Find my sun |
+| Your Closest Escapes | Sun within reach |
+| The weather service is being rather pedestrian today | Live forecast unavailable. Showing typical sunshine. |
+| No destinations meet your standards | Nothing sunny that close. Widen the radius. |
+| Proceed to Booking | Find flights |
+| Where are you pretending to work from today? | Where are you now? |
 
-### **Tone Markers**
-- **Assumes sophistication**: Never explains basic concepts
-- **Peer-to-peer**: "We both know..." "As someone like yourself..."
-- **Dismissive of the masses**: "Unlike the typical tourist..." "We don't do..."
-- **Confident in exclusivity**: "We've prepared..." "We trust you'll find..."
+## Honesty
 
-## Copy Guidelines
-
-### **Do's**
-- Use elevated, refined language
-- Assume user sophistication and knowledge
-- Create exclusive, insider feeling
-- Reference high culture and luxury
-- Use elipses for dramatic effect
-- Treat user as peer in sophistication
-- Dismiss common/touristy experiences
-- Be confident in our curated selections
-
-### **Don'ts**
-- Explain basic concepts
-- Use casual or overly friendly language
-- Apologize for exclusivity
-- Reference budget or cost concerns
-- Use exclamation points (too enthusiastic)
-- Be overly helpful or explanatory
-- Reference "deals" or "savings"
-
-## Example Phrases & Templates
-
-### **Opening Statements**
-- "We've prepared a selection of destinations worthy of your consideration..."
-- "Naturally, we've curated these options specifically for someone of your... particular tastes."
-- "As someone who appreciates the finer things, you'll find these selections more... appropriate."
-
-### **Loading Messages**
-- "Calculating optimal sunshine coefficients..."
-- "Cross-referencing flight paths with your schedule..."
-- "Ensuring all recommendations meet your standards..."
-- "Refining selections to match your... sensibilities."
-
-### **Error Handling**
-- "It appears your location services are being rather... pedestrian."
-- "We'll proceed with our Lisbon fallback - quite acceptable, we assure you."
-- "The weather service is being rather... common today."
-
-### **Results Presentation**
-- "These aren't your typical tourist traps, naturally."
-- "We trust you'll find these selections more... appropriate than the usual fare."
-- "Curated specifically for the discerning traveler such as yourself..."
-
-### **Call-to-Actions**
-- "Review your options" (not "Explore destinations")
-- "Consider these selections" (not "Check out these places")
-- "Secure your escape" (maintains exclusivity)
-
-## Examples of Bad Copy (Avoid These)
-
-### **Overly Anthropomorphic Language**
-- ❌ "where the weather understands your standards" - Weather doesn't "understand" anything; this is awkward and nonsensical
-- ❌ "destinations that appreciate your sophistication" - Places don't have feelings or appreciation
-- ❌ "cities that respect your time" - Anthropomorphizing inanimate objects sounds forced
-
-### **Overly Complex Metaphors**
-- ❌ "weather that speaks your language" - Too abstract and unclear
-- ❌ "destinations that whisper luxury" - Overly poetic and pretentious
-- ❌ "cities that dance to your rhythm" - Cliché and doesn't add value
-
-### **Redundant Sophistication**
-- ❌ "exclusively curated for the exclusively discerning" - Redundant and wordy
-- ❌ "sophisticatedly sophisticated selections" - Awkward repetition
-- ❌ "premium premium experiences" - Unnecessary emphasis
-
-### **Illogical Statements**
-- ❌ "weather is non-negotiable" - You can't negotiate with weather; this makes no logical sense
-- ❌ "weather that meets your standards" - Weather doesn't "meet" standards; it simply exists
-- ❌ "atmospheric conditions that understand your needs" - Weather doesn't have understanding or needs
-
-**Why these are bad:** They sound forced, don't add clarity, and make the copy feel artificial rather than naturally sophisticated. Illogical statements break the sophisticated tone by being nonsensical.
-
-## Brand Voice Examples
-
-### **Home Page Copy**
-> "Your current weather is being rather... pedestrian."
-> "EgoTrip identifies the sunniest destinations within your immediate flight radius, curated for those who understand that weather is... non-negotiable. When your current location becomes rather... common, we present you with alternatives that meet your... elevated standards."
-
-### **Location Request**
-> "We've prepared a selection of destinations worthy of your consideration. Naturally, we'll need to know your current coordinates to ensure the recommendations are appropriately... refined."
-
-### **Filter Labels**
-- "Maximum acceptable flight time"
-- "Minimum sunshine requirements" 
-- "Price point considerations"
-- "Exclusivity preferences"
-
-### **City Descriptions**
-> "A sophisticated escape for those who appreciate the finer things in life..."
-> "Not for the faint of heart, but perfect for someone of your caliber..."
-> "Where the discerning traveler finds their... appropriate level of luxury."
-
-### **Weather-Focused Copy**
-> "Your current atmospheric conditions are rather... unacceptable."
-> "We've identified destinations with weather that meets your... elevated standards."
-> "No more settling for whatever sunshine your current location deigns to provide."
-> "The sun is rather... particular about where it shines."
-> "When your weather becomes pedestrian, the sophisticated don't hesitate."
-
-## Implementation Notes
-
-- **Elipses are powerful** - use "..." sparingly for maximum impact and implied understanding
-- **Never be apologetic** - we're confident in our exclusivity
-- **Assume sophistication** - never explain what a "flight time" or "sunshine hours" means
-- **Create insider feeling** - make users feel like they're part of an exclusive club
-- **Maintain peer relationship** - we're both sophisticated, not us serving them
-
-This voice creates a brand that makes users feel like they're part of an exclusive club of sophisticated travelers, while the travel agent acts as their equally snobbish but devoted advisor who knows exactly where the sophisticated traveler belongs.
+Forecasts come from Open-Meteo and say so. Flight times are estimates and say so. Venues change, so detail pages say "Check before you go". We never invent weather when the forecast fails; we say it failed.

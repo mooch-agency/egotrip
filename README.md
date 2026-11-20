@@ -1,236 +1,85 @@
-# EgoTrip 🌞✈️
+# Egotrip
 
-> *For the discerning traveler who refuses to settle for pedestrian weather. Sophisticated destination recommendations with workspace intelligence for maintaining appearances.*
+Cloudy here? Leave.
 
-[![Next.js](https://img.shields.io/badge/Next.js-15.2.4-black?style=flat&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.17-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
+Egotrip ranks 80 places by how much sun they'll get over the next two weeks and how long it takes to fly there from wherever you are. Each place comes with somewhere to take calls, things to do after hours and a cover story for the office. A plaything by [Mooch](https://mooch.agency).
 
-## Overview
+## Run it
 
-EgoTrip is a sophisticated travel discovery platform for those who refuse to settle for pedestrian atmospheric conditions. We've prepared destinations within your immediate flight radius with weather that meets your standards. Naturally, we've included workspace intelligence for maintaining appearances.
+Needs Node 20.9+ and pnpm. No API keys.
 
-### Key Features
-
-- 🌍 **Your Closest Escapes**: Location-based recommendations within your flight radius
-- ☀️ **Atmospheric Excellence**: Real-time weather data for superior climate selection
-- ✈️ **Flight Time Intelligence**: Precise calculations for your strategic retreats
-- 🏖️ **Refined Destinations**: Curated properties that understand sophistication
-- 🎭 **Executive Arrangements**: Pre-crafted alibis for maintaining professional appearances
-- 🌙 **Dark/Light Mode**: Work in your preferred aesthetic
-- 📱 **Responsive Design**: Perfect for planning escapes on any device
-- 📱 **PWA Support**: Install as a mobile app for on-the-go planning
-
-## Quick Start
-
-### Prerequisites
-
-- Node.js 18+ 
-- npm, yarn, or pnpm
-- OpenWeatherMap API key (free at [openweathermap.org](https://openweathermap.org/api))
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/gichigi/egotrip.git
-   cd egotrip
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   ```
-
-3. **Set up environment variables**
-   
-   Create a `.env` file and add your OpenWeatherMap API key:
-   ```env
-   OPEN_WEATHER_MAP_KEY=your_api_key_here
-   ```
-
-4. **Run the development server**
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
-   ```
-
-5. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## API Setup
-
-### OpenWeatherMap API
-
-EgoTrip uses the OpenWeatherMap API for real-time weather data. To get started:
-
-1. Visit [OpenWeatherMap](https://openweathermap.org/api)
-2. Sign up for a free account
-3. Generate an API key
-4. Add it to your `.env` file
-
-The free tier includes:
-- 1,000 API calls per day
-- 5-day weather forecast
-- Current weather data
-
-## Project Structure
-
-```
-egotrip/
-├── app/                    # Next.js app directory
-│   ├── actions/           # Server actions
-│   │   └── weather.ts     # Weather API integration
-│   ├── components/        # Reusable components
-│   ├── context/           # React context providers
-│   ├── destinations/       # Destinations page
-│   │   ├── data.ts        # Static destination data
-│   │   ├── types.ts       # TypeScript definitions
-│   │   └── page.tsx       # Main destinations page
-│   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Home page
-├── components/            # Shared UI components
-│   └── ui/                # shadcn/ui components
-├── lib/                   # Utility functions
-├── public/                # Static assets
-│   ├── images/            # Destination images
-│   ├── manifest.json      # PWA manifest
-│   ├── robots.txt         # SEO crawling rules
-│   ├── sitemap.xml        # SEO sitemap
-│   ├── og-image.svg       # Social media preview
-│   ├── twitter-image.svg  # Twitter card image
-│   └── favicon files      # App icons and favicons
-└── scripts/               # Utility scripts
+```bash
+pnpm install
 ```
 
-## Key Components
+```bash
+pnpm dev
+```
 
-### Weather Integration
-- **Real-time data**: Fetches current weather and 3-day forecasts
-- **Fallback system**: Graceful degradation when API is unavailable
-- **Caching**: 1-hour cache to minimize API calls
-- **Error handling**: User-friendly fallback data
+Open http://localhost:3000. In local dev there are no Vercel geo headers, so your starting point is Lisbon until you pick another city.
 
-### Location Services
-- **Geolocation**: Automatic user location detection
-- **IP-based fallback**: Sophisticated location detection
-- **Manual selection**: Fallback location picker
-- **Flight calculations**: Distance and flight time estimates
-- **Default fallback**: Lisbon, Portugal (because it's always sunny somewhere)
+Optional: copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_APP_URL` to the deployed URL so canonical links, Open Graph cards and the sitemap point at the right host.
 
-### Destination Data
-- **20+ curated destinations**: From Bali to Bora Bora
-- **Rich metadata**: Prices, exclusivity levels, workspaces, alibis
-- **Filtering options**: Flight time, sunshine hours, price, region
-- **Search functionality**: Find destinations by name or country
+## Scripts
 
-## Customization
+| Command | What it does |
+|---|---|
+| `pnpm dev` | Dev server |
+| `pnpm build` / `pnpm start` | Production build and server |
+| `pnpm typecheck` | `tsc --noEmit` |
+| `pnpm test` | Vitest unit tests (lib, data integrity, route handlers) |
+| `pnpm test:e2e` | Playwright against a production server on port 3200 (run `pnpm build` first) |
+| `pnpm test:all` | All of the above, in order |
 
-### Adding New Destinations
+First e2e run: `pnpm exec playwright install chromium`.
 
-1. **Update data file**: Add to `app/destinations/data.ts`
-2. **Add coordinates**: Include in `app/destinations/coordinates-data.ts`
-3. **Add images**: Place in `public/images/`
-4. **Update types**: Ensure TypeScript compatibility
+## How it works
 
-### Styling
+- **Forecast.** `/api/forecast` asks [Open-Meteo](https://open-meteo.com) for all 80 places in one request: 14 days of weather code, highs and lows, sunshine and daylight duration, rain chance and UV. Cached at the edge for an hour (stale-while-revalidate for a day). If Open-Meteo fails, the route returns a 502 and the UI says the live forecast is unavailable. We never invent weather.
+- **Reading a day.** Open-Meteo's daily weather code is the worst hour, so one shower turns a sunny day into "drizzle". `dayKind` in `lib/forecast/weather-codes.ts` uses sunshine as a share of daylight instead (70%+ sunny, 40%+ partly sunny) and only lets the code win when rain is 60% likely or more.
+- **Origin.** Saved city first (localStorage), then an approximate location from Vercel's IP headers (`/api/whereami`, no prompt), then Lisbon. Precise location only when someone clicks "Use my precise location", and it stays in the browser. City search uses Open-Meteo geocoding.
+- **Flight time.** Great-circle distance × 1.1, at 830 km/h, plus 40 minutes, rounded to 15. Always labelled "about". Under 150 km reads "You're here".
+- **Ranking.** `lib/rank.ts` filters by flight radius, region, crowd level and search, then sorts by mean sunshine over the next 7 days (or closest, or warmest). Without a live forecast it falls back to each place's typical sunshine and says so.
+- **Radius.** The list opens on 6 hours. If that reaches fewer than 5 places (Tokyo, Honolulu), `autoRadius` widens to 9h, then 12h, then any distance, and the status line says so. The place page reads the same default ranking for "26 of 30", "Next" and "Also sunny", so the two pages agree.
 
-The app uses Tailwind CSS with a custom design system:
-- **Colors**: Amber accent, zinc grays, dark/light themes
-- **Typography**: Inter font, various weights and sizes
-- **Components**: shadcn/ui component library
-- **Responsive**: Mobile-first design approach
+## Layout
 
-### Brand Voice
+```
+app/
+  page.tsx                  home is the app: pitch, controls, best bet, ranked tiles, how it works
+  to/[slug]/page.tsx        one place: getting there, forecast, where to work, after hours, cover story, also sunny
+  api/forecast, api/whereami
+  opengraph-image.tsx, to/[slug]/opengraph-image.tsx, apple-icon.tsx, icon.svg
+  sitemap.ts, robots.ts, manifest.ts, not-found.tsx
+components/
+  site/                     app bar (origin + theme), footer
+  explorer/                 home list: controls, best bet, tiles, default ranking hook
+  destination/              place page: trip card + phone dock, section tabs, forecast grid, after hours
+  forecast/                 shared forecast store, sun strip, sun bars, weather icons
+  origin/                   origin provider and picker (sheet on phones)
+lib/
+  destinations/             types, labels, data/<region>.ts (80 places), index
+  forecast/                 Open-Meteo client and parser, weather codes, summaries
+  geo.ts, rank.ts, origin.ts, format.ts, og.tsx
+tests/unit, tests/e2e
+docs/upgrade-spec.md        v2 audit, spec and plan
+BRAND_VOICE.md              how Egotrip writes
+```
 
-EgoTrip maintains a sophisticated, travel agent-focused tone. See [BRAND_VOICE.md](./BRAND_VOICE.md) for detailed guidelines on the elite travel agent archetype.
+## Adding a place
 
-## Deployment
+1. Add an entry to the right file in `lib/destinations/data/`. Copy the Lisbon entry in `europe-west.ts` for shape.
+2. Follow [BRAND_VOICE.md](BRAND_VOICE.md): 4-5 real workspaces you've checked exist, 5-6 places, 3 alibis, 2 "spotted" lines. No em dashes, no banned words.
+3. Run `pnpm test`. The data integrity test checks slugs, coordinates, counts, lengths and copy rules.
 
-### Vercel (Recommended)
+Order matters: the forecast request maps results back by array position, so append rather than insert if you can.
 
-1. **Connect your repository** to Vercel
-2. **Add environment variables** in the Vercel dashboard
-3. **Deploy automatically** on every push to main
+## Design
 
-**Live Demo**: [egotrip.vercel.app](https://egotrip.vercel.app)
+The visual language comes from the mooch.agency design system: paper and ink palette, Instrument Serif headings with one italic word, mono labels, hairline grids, pill buttons and segmented controls, blur reveal with a reduced-motion guard. The page structure is Egotrip's own: an app, not an agency site. Home opens straight on the list; a place page leads with "Getting there" and keeps the booking link in a dock on phones. Two borrowed colours, `--sun` and `--rain`, are only for forecast marks. Light and dark follow the system unless toggled.
 
-### Other Platforms
+`/destinations` (the v1 list page) redirects to `/` permanently; `/sun` is a short alias for `/`.
 
-The app can be deployed to any platform that supports Next.js:
-- Netlify
-- Railway
-- Render
-- AWS Amplify
+## Credits
 
-## SEO & Social Media
-
-### Built-in Features
-- **Open Graph tags**: Professional social media previews
-- **Twitter Cards**: Optimized for Twitter sharing
-- **PWA support**: Install as mobile app
-- **Sitemap**: Automatic SEO crawling
-- **Robots.txt**: Search engine optimization
-- **Favicons**: Complete icon set for all devices
-
-### Social Media Preview
-The app includes professionally designed social media preview images that automatically display when shared on:
-- LinkedIn
-- Twitter/X
-- Facebook
-- Discord
-- Slack
-
-## Contributing
-
-We welcome contributions from fellow visionaries who understand the importance of strategic sunlight allocation.
-
-### Development Setup
-
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. **Make your changes**
-4. **Test thoroughly**
-5. **Submit a pull request**
-
-### Code Style
-
-- **TypeScript**: Strict mode enabled
-- **ESLint**: Next.js recommended rules
-- **Prettier**: Consistent code formatting
-- **Conventional Commits**: Clear commit messages
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- **OpenWeatherMap** for weather data
-- **shadcn/ui** for beautiful components
-- **Next.js** for the amazing framework
-- **All the founders** who inspired this tool for strategic escapes
-
-## Support
-
-Having trouble with your strategic planning? 
-
-- **Issues**: [GitHub Issues](https://github.com/gichigi/egotrip/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/gichigi/egotrip/discussions)
-
----
-
-*Remember: "Weather... matters" - and now you can find exactly where that weather meets your standards.*
-
-**Made with sophistication in Portugal. All rights reserved for those who refuse to settle for... pedestrian weather.** 🇵🇹
+Weather data by [Open-Meteo](https://open-meteo.com), CC BY 4.0. Flight times are estimates, not schedules. Venues change: check before you go.
